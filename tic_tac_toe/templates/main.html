@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    <title>Kółko i krzyżyk</title> 
+{% endblock title %}
+
+{% block style %}
+    <link rel="stylesheet" href="../static/css/menu.css">
+{% endblock style %}
+
+{% block content %}
+
+<section id="username_section">
+    <div class="text-center mt-5">
+        <label for="username">Podaj swoje imię</label>
+        <input type="text" placeholder="Imie" id="username">
+        <button id="start-btn" class="btn btn-primary p-y-4">GRAJ</button>
+    </div>
+</section>
+
+<section id="menu">
+    <div class="container">
+        <h1 class="text-center p-4 text-uppercase">Menu</h1>
+        <div class="text-center">
+            <a href="{{ url_for('Board.Board')}}">
+                <button class="btn btn-primary option-btn">Zagraj</button>
+            </a>
+        </div>
+        <div class="text-center">
+            <a href="{{ url_for('Statistic.UsersStatistic') }}">
+                <button class="btn btn-primary option-btn">Statystyki</button>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block script %}
+    <script src="../static/js/main_socketio.js"></script>
+{% endblock script %}

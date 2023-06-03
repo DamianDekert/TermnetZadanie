@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    <title>Statystyki</title>
+{% endblock title %}
+
+{% block style %}
+
+{% endblock style %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1>Statystyki graczy {{ today }} </h1>
+</div>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Wygrane</th>
+        <th scope="col">Przegrane</th>
+        <th scope="col">Remisy</th>
+        <th scope="col">Czas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>{{total_wins}}</td>
+        <td>{{total_losses}}</td>
+        <td>{{total_draws}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-center">
+    <a href="{{ url_for('Board.Board') }}">
+      <button class="btn btn-primary">Powrót</button>
+    </a>
+  </div>
+{% endblock content %}

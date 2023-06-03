@@ -1,0 +1,118 @@
+{% extends './base/base.html' %}
+
+{% block title %}
+    <title>Kółko i krzyżyk</title>
+{% endblock title %}
+
+{% block style %}
+    <link rel="stylesheet" href="../static/css/board.css">
+{% endblock style %}
+
+{% block content %}
+
+<section id="board">
+    <div id="board">
+        <h1 class="text-center p-4">Witaj {{ username }}</h1>
+        <h4>Kredyty : {{ user_points }} </h4>
+        <h4>Życia : {{ user_lifes }}</h4>
+        <a href="{{ url_for('Statistic.UsersStatistic') }}">
+            <button class="btn btn-primary ms-1 mt-1">Statystyki</button>
+        </a>
+        <table class="board-table">
+            {% for row in range(3) %}
+                <tr>
+                    {% for col in range(3) %}
+                        <td>
+                            {% if board[row][col] %}
+                                {{ board[row][col] }}
+                            {% else %}
+                                <form method="POST" action="{{ url_for('Board.Board') }}">
+                                    <input type="hidden" name="row" value="{{ row }}">
+                                    <input type="hidden" name="col" value="{{ col }}">
+                                    <button type="submit">Graj {{ turn }}</button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div> 
+</section>
+
+
+<section id="popup-welcome-msg">
+    <div class="text-center mt-5">
+        <h3>
+            Witaj w grze!
+        </h3>
+        <p>
+            Oto krótka instrukcja:<br>
+            - Jedna gra to koszt 3 kredytów, do dyspozycji masz 10 doładowań.<br>
+            - Wygrana daje Ci 4 kredyty.<br>
+            - Jeżeli przegrasz i nie będziesz miał juz doładowań ani kredytów gra się skończy. <br>
+            Powodzenia! <br>
+        </p>
+        <button class="btn btn-primary start-btn p-3">Rozpocznij</button>
+    </div>
+</section>
+
+{% if show_win_message %}
+    <script type="module" src="../static/js/board_win_action.js"></script>
+{% endif %}
+
+<section id="finished-win-game">
+    <div class="text-center mt-5">
+        <p>Wygrana do twojego konta zostają dodane 4 kredyty!</p>
+        <button class="btn btn-primary continue-btn p-3">Graj dalej</button>
+    </div>
+</section>
+
+{% if show_lose_message %}
+    <script type="module" src="../static/js/board_lose_action.js"></script>
+{% endif %}
+
+<section id="finished-lose-game">
+    <div class="text-center mt-5">
+        <p>Przegrana</p>
+        {% if user_points  < 3 %}
+            {% if user_points + user_lifes >= 3 or not game_over %}
+                <button class="btn btn-primary continue-lose-btn p-3">Wykorzystaj życia i graj dalej</button>
+            {% else %}
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </ul>
+                <a href="{{ url_for("Main.UsernamePass") }}">
+                    <button class="btn btn-primary">Spróbuj ponownie</button>
+                </a>
+                {% endif %}
+                {% endwith %}
+            {% endif %}
+        {% else %}
+            <button class="btn btn-primary continue-lose-btn p-3">Graj dalej</button>
+        {% endif %}
+    </div>
+</section>
+
+{% if show_draw_message %}
+    <script type="module" src="../static/js/board_draw_action.js"></script>
+{% endif %}
+
+
+<section id="finished-draw-game">
+    <div class="text-center mt-5">
+        <p>Remis!</p>
+        <button class="btn btn-primary continue-draw-btn p-3">Graj dalej</button>
+    </div>
+</section>
+
+
+
+{% endblock content %}
+
+{% block script %}
+    <script type="module" src="../static/js/board_action.js"></script>
+{% endblock script %}

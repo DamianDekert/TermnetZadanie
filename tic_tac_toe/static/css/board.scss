@@ -1,0 +1,46 @@
+#board {
+    .board-table{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        scale: 1.1;
+        margin: 60px auto;
+        border-collapse: collapse;
+        tr {
+            &:nth-child(2) {
+                border-top: 2px solid black;
+                border-bottom: 2px solid black;
+            }
+
+            td {
+                padding: 40px;
+                &:nth-child(2) {
+                    border-left: 2px solid black;
+                    border-right: 2px solid black;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: black;
+                }
+    
+            }
+        }
+    }
+}
+
+#popup-welcome-msg {
+    display: none;
+}
+
+#finished-win-game {
+    display: none;
+}
+
+#finished-lose-game {
+    display: none;
+}
+
+#finished-draw-game {
+    display: none;
+}

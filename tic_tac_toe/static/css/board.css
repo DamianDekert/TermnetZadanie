@@ -1,0 +1,39 @@
+#board .board-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scale: 1.1;
+  margin: 60px auto;
+  border-collapse: collapse;
+}
+#board .board-table tr:nth-child(2) {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+#board .board-table tr td {
+  padding: 40px;
+}
+#board .board-table tr td:nth-child(2) {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+#board .board-table tr td a {
+  text-decoration: none;
+  color: black;
+}
+
+#popup-welcome-msg {
+  display: none;
+}
+
+#finished-win-game {
+  display: none;
+}
+
+#finished-lose-game {
+  display: none;
+}
+
+#finished-draw-game {
+  display: none;
+}/*# sourceMappingURL=board.css.map */
